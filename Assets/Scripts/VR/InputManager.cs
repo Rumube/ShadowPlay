@@ -12,6 +12,13 @@ public class InputManager : MonoBehaviour
     Vector3 _rightRotation;
     Vector3 _leftPosition;
     Vector3 _rightPosition;
+
+    //ACTIONS CONTROLLER
+    bool _isCreateCloud = false;
+    bool _isCreateBook = false;
+    bool _isCreateCube = false;
+    bool _isCreateSpring = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,23 +83,92 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    /*
+     Muelle:
+        I.R 324.6 357.9 4.2
+        D.R 322.1 2.7 342.4
 
-    //7.4 13.5 264.4 D
-    //11.5 328.8 87.9 I
+        D.P 0 0.9 1
+        I.P 0 1.1 0.1
+
+     Muro
+        I.R 288 78.5 213.4
+        D.R 300.2 243.5 192.4
+    Caja
+        D.I.R 337 347.2 14.5
+
+        I.P -0.1 1 0.1
+        D.P 0.2 1 0.2
+     */
+
     void VRActions()
     {
-        if (_leftTrigger && _rightTrigger && _rightRotation.z >=240 && _rightRotation.z <= 280  && _leftRotation.z>= 50 && _leftRotation.z <= 110)
+        //CLOUD INPUT
+        if (_leftTrigger && _rightTrigger && _rightRotation.z >=240 && _rightRotation.z <= 280  && _leftRotation.z >= 50 && _leftRotation.z <= 110)
         {
-            print("ESTOY ENTRANDO!!");
+            _isCreateCloud = true;
+            //MOSTRAR ELEMENTO
         }
-        /*
-        if(_leftTrigger && _rightTrigger && VRActionsOffset(_rightRotation, GameManager.Instance._rotationOffset) && VRActionsOffset(_leftRotation, GameManager.Instance._rotationOffset))
+        else
         {
-            print("ESTOY ENTRANDO!!");
+            if (_isCreateCloud && _rightRotation.z >= 240 && _rightRotation.z <= 280 && _leftRotation.z >= 50 && _leftRotation.z <= 110)
+            {
+                createCloud();
+            }
+            _isCreateCloud = false;
         }
-        */
+
+        //BOOK INPUT
+        if(_leftTrigger && _rightTrigger && _rightRotation.z >= 40 && _rightRotation.z <= 90 && _leftRotation.z >= 260 && _leftRotation.z <= 300)
+        {
+            _isCreateBook = true;
+            //MOSTRAR ELEMENTO
+        }
+        else
+        {
+            if (_isCreateBook && _rightRotation.z >= 40 && _rightRotation.z <= 90 && _leftRotation.z >= 260 && _leftRotation.z <= 300)
+            {
+                createBook();
+            }
+            _isCreateBook = false;
+        }
+
+        //CUBE INPUT
+        if(_leftTrigger && _rightTrigger && _rightTrigger && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
+            _rightPosition.x >= 0 && _rightPosition.x <= 0.5f && _leftPosition.x >= -0.5f && _leftPosition.x <= 0)
+        {
+            _isCreateCube = true;
+            //MOSTRAR ELEMENTO
+        }
+        else
+        {
+            if (_isCreateCube && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
+                _rightPosition.x >= 0 && _rightPosition.x <= 0.5f && _leftPosition.x >= -0.5f && _leftPosition.x <= 0)
+            {
+                createCube();
+            }
+            _isCreateCube = false;
+        }
+
+        //SpringInput
+        if(_leftTrigger && _rightTrigger && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
+            _rightPosition.x >= -0.2f && _rightPosition.x <= 0.2f && _leftPosition.x >= -0.2f && _leftPosition.x <= 0.2f)
+        {
+            _isCreateSpring = true;
+            //MOSTRAR ELEMENTO
+        }
+        else
+        {
+            if(_isCreateSpring && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
+            _rightPosition.x >= -0.2f && _rightPosition.x <= 0.2f && _leftPosition.x >= -0.2f && _leftPosition.x <= 0.2f)
+            {
+                createSpring();
+            }
+            _isCreateSpring = false;
+        }
     }
 
+    /*
     bool VRActionsOffset(Vector3 value, Vector3 offset)
     {
         Vector3 auxVector = value;
@@ -129,7 +205,7 @@ public class InputManager : MonoBehaviour
         return auxVector.x <= auxVector.x + offset.x && auxVector.y <= auxVector.y + offset.y && auxVector.z <= auxVector.z + offset.z &&
             auxVector.x >= auxVector.x - offset.x && auxVector.y >= auxVector.y - offset.y && auxVector.z >= auxVector.z - offset.z;
     }
-
+    */
     void createCloud()
     {
         print("Crear nube");
