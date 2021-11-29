@@ -561,6 +561,7 @@ GameObject:
   m_Component:
   - component: {fileID: 511198881}
   - component: {fileID: 511198880}
+  - component: {fileID: 511198882}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -580,8 +581,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856342b1761420543b37a988cb2c7fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubo: {fileID: 75680885}
+  _cubo: {fileID: 75680885}
   _Test2D: 0
+  _rotationOffset: {x: 50, y: 50, z: 50}
+  _positionOffset: {x: 0, y: 0, z: 0}
 --- !u!4 &511198881
 Transform:
   m_ObjectHideFlags: 0
@@ -596,6 +599,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &511198882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511198879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e684b4b93db7350449db304d4e8462cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &569957810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1528,7 +1543,7 @@ GameObject:
   - component: {fileID: 889466185}
   - component: {fileID: 889466184}
   m_Layer: 3
-  m_Name: Rotar
+  m_Name: Suelo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
