@@ -11,7 +11,8 @@ public class Luciernagas : MonoBehaviour
     //Vector3 direccionNormalizada;
     public float velocidad;
     bool moviendose=true;
-    
+    bool right;
+    bool left;
 
    // public float wanderRadius = 5f; //Radio en el que se mueve el murciélago
     public Rigidbody luciernaga;
@@ -63,6 +64,12 @@ public class Luciernagas : MonoBehaviour
                 StartCoroutine(coroutine);
             }
         }
+
+
+        if (right==true&&left==true)
+        {
+            Destroy(gameObject);
+        }
         ////luciernaga.
         //if (Gototarget == true)
         //{
@@ -111,6 +118,26 @@ public class Luciernagas : MonoBehaviour
             coroutine = Movimiento(Random.Range(2f, 4f));
 
             StartCoroutine(coroutine);
+        }
+        if (collision.gameObject.tag=="RightHand")
+        {
+            right = true;
+        }
+        if (collision.gameObject.tag == "LeftHand")
+        {
+            left = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "RightHand")
+        {
+            right = false;
+        }
+        if (collision.gameObject.tag == "LeftHand")
+        {
+            left = false;
         }
     }
 
