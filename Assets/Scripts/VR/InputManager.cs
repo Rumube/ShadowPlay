@@ -6,12 +6,15 @@ using UnityEngine.XR;
 public class InputManager : MonoBehaviour
 {
 
+    public Light _prueba;
+
     bool _leftTrigger;
     bool _rightTrigger;
     Vector3 _leftRotation;
     Vector3 _rightRotation;
     Vector3 _leftPosition;
     Vector3 _rightPosition;
+    Vector3 _headPosition;
 
     //ACTIONS CONTROLLER
     bool _isCreateCloud = false;
@@ -30,6 +33,16 @@ public class InputManager : MonoBehaviour
     {
         InputDetection();
         VRActions();
+
+        if(_isCreateBook || _isCreateCloud || _isCreateCube || _isCreateSpring)
+        {
+            _prueba.gameObject.SetActive(true);
+        }
+        else
+        {
+            _prueba.gameObject.SetActive(false);
+        }
+
     }
 
     void InputDetection()
@@ -50,7 +63,9 @@ public class InputManager : MonoBehaviour
             if (GameManager.Instance._rigDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition, out Vector3 rightPosition))
                 _rightPosition = rightPosition;
 
-
+            //POSICION HEAD
+            if (GameManager.Instance._headDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition, out Vector3 headPosition))
+                _headPosition = headPosition;
 
 
             //PRIMARY BUTTOM
@@ -104,14 +119,14 @@ public class InputManager : MonoBehaviour
     void VRActions()
     {
         //CLOUD INPUT
-        if (_leftTrigger && _rightTrigger && _rightRotation.z >=240 && _rightRotation.z <= 280  && _leftRotation.z >= 50 && _leftRotation.z <= 110)
+        if (_leftTrigger && _rightTrigger && _rightRotation.z >=190 && _rightRotation.z <= 310 && _leftRotation.z >= 20 && _leftRotation.z <= 140)
         {
             _isCreateCloud = true;
             //MOSTRAR ELEMENTO
         }
         else
         {
-            if (_isCreateCloud && _rightRotation.z >= 240 && _rightRotation.z <= 280 && _leftRotation.z >= 50 && _leftRotation.z <= 110)
+            if (_isCreateCloud && _rightRotation.z >= 190 && _rightRotation.z <= 310 && _leftRotation.z >= 20 && _leftRotation.z <= 140)
             {
                 createCloud();
             }
@@ -119,23 +134,24 @@ public class InputManager : MonoBehaviour
         }
 
         //BOOK INPUT
-        if(_leftTrigger && _rightTrigger && _rightRotation.z >= 40 && _rightRotation.z <= 90 && _leftRotation.z >= 260 && _leftRotation.z <= 300)
+        if(_leftTrigger && _rightTrigger && _rightRotation.z >= 20 && _rightRotation.z <= 120 && _leftRotation.z >= 240 && _leftRotation.z <= 340)
         {
             _isCreateBook = true;
             //MOSTRAR ELEMENTO
         }
         else
         {
-            if (_isCreateBook && _rightRotation.z >= 40 && _rightRotation.z <= 90 && _leftRotation.z >= 260 && _leftRotation.z <= 300)
+            if (_isCreateBook && _rightRotation.z >= 20 && _rightRotation.z <= 120 && _leftRotation.z >= 240 && _leftRotation.z <= 340)
             {
                 createBook();
             }
             _isCreateBook = false;
         }
+        float dist = Vector3.Distance(_rightPosition, _leftPosition);
 
         //CUBE INPUT
-        if(_leftTrigger && _rightTrigger && _rightTrigger && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
-            _rightPosition.x >= 0 && _rightPosition.x <= 0.5f && _leftPosition.x >= -0.5f && _leftPosition.x <= 0)
+        if (_leftTrigger && _rightTrigger && _rightTrigger && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
+            dist > 0.3f && dist <= 0.7f)
         {
             _isCreateCube = true;
             //MOSTRAR ELEMENTO
@@ -143,16 +159,16 @@ public class InputManager : MonoBehaviour
         else
         {
             if (_isCreateCube && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
-                _rightPosition.x >= 0 && _rightPosition.x <= 0.5f && _leftPosition.x >= -0.5f && _leftPosition.x <= 0)
+               dist > 0.3f && dist <= 0.7f)
             {
                 createCube();
             }
             _isCreateCube = false;
         }
-
+        print("spring"+ (Mathf.Abs(_leftPosition.y) - Mathf.Abs(_rightPosition.y)));
         //SpringInput
         if(_leftTrigger && _rightTrigger && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
-            _rightPosition.x >= -0.2f && _rightPosition.x <= 0.2f && _leftPosition.x >= -0.2f && _leftPosition.x <= 0.2f)
+            dist >= 0f &&  dist <= 0.2f && Mathf.Abs(Mathf.Abs(_leftPosition.y) - Mathf.Abs(_rightPosition.y))>= 0.15f && Mathf.Abs(Mathf.Abs(_leftPosition.y) - Mathf.Abs(_rightPosition.y)) <= 0.25f)
         {
             _isCreateSpring = true;
             //MOSTRAR ELEMENTO
@@ -160,7 +176,7 @@ public class InputManager : MonoBehaviour
         else
         {
             if(_isCreateSpring && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
-            _rightPosition.x >= -0.2f && _rightPosition.x <= 0.2f && _leftPosition.x >= -0.2f && _leftPosition.x <= 0.2f)
+            dist >= 0f && dist <= 0.2f)
             {
                 createSpring();
             }

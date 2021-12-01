@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     public InputDevice _lefDevice { private set; get; }
     public InputDevice _rigDevice { private set; get; }
+    public InputDevice _headDevice { private set; get; }
     public GameObject _cubo;
 
     public bool _Test2D;
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
 
             _lefDevice = leftController[0];
             _rigDevice = rigthController[0];
+            _headDevice = devices[0];
         }
 
     }
