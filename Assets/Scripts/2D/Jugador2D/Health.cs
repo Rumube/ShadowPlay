@@ -5,11 +5,11 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
 
-    GameObject gamemanager2D;
+    //GameObject gamemanager2D;
     public int vida;
     private void Awake()
     {
-        gamemanager2D = GameObject.FindGameObjectWithTag("GameManager2D");
+       // gamemanager2D = GameObject.FindGameObjectWithTag("GameManager2D");
        
     }
     void Start()
