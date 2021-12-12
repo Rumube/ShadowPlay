@@ -702,7 +702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prueba: {fileID: 643284132}
-  _hitZoneDistance: 0.3
+  _hitZoneDistance: 0.5
   _visorHelp: {fileID: 1931083134}
 --- !u!1001 &569957810
 PrefabInstance:

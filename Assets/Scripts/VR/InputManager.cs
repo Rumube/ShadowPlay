@@ -33,6 +33,7 @@ public class InputManager : MonoBehaviour
     void Start()
     {
         _createZoneList = GameObject.FindGameObjectsWithTag("CreateZone");
+        _currentCreateZone = _createZoneList[0];
     }
 
     private void FixedUpdate()

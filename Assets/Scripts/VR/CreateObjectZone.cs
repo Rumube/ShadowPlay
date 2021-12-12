@@ -8,10 +8,12 @@ public class CreateObjectZone : MonoBehaviour
     public GameObject _objectsParent;
     public GameObject[] _objectsToCreate = new GameObject[4];
     bool _isCreating;
+    Animator _anim;
     // Start is called before the first frame update
     void Start()
     {
-        _isCreating = false;   
+        _isCreating = false;
+        _anim = _objectsParent.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class CreateObjectZone : MonoBehaviour
 
     public void InitCreation(int objectToCreate)
     {
+        _anim.Play("Pawn");
         _isCreating = true;
         setFalseObjects();
         _objectsToCreate[objectToCreate].SetActive(true);
