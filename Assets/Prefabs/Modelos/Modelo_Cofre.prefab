@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6449643024483811138}
   - component: {fileID: 5590958344088898238}
   - component: {fileID: 2104908645276807199}
-  m_Layer: 0
+  - component: {fileID: 656988565}
+  m_Layer: 3
   m_Name: Modelo_Cofre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2369625856313154941}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.025, y: 0.025, z: 0.025}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 1030015946743777209}
   - {fileID: 6323041536293481799}
@@ -46,8 +47,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 44.43905, y: 16.550064, z: 35.813107}
-  m_Center: {x: -14.480543, y: -41.562572, z: 6.322701}
+  m_Size: {x: 44.43905, y: 16.550007, z: 35.813107}
+  m_Center: {x: -14.480543, y: -41.562595, z: 6.322701}
 --- !u!65 &5590958344088898238
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -74,6 +75,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.4157143, y: 0.7757211, z: 35.813107}
   m_Center: {x: -40.575542, y: -39.1529, z: 6.322701}
+--- !u!65 &656988565
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369625856313154941}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 44.43905, y: 9.657974, z: 35.813107}
+  m_Center: {x: -14.480543, y: -7.0765495, z: 6.322701}
 --- !u!1 &5469545052255887239
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,7 +99,7 @@ GameObject:
   - component: {fileID: 1030015946743777209}
   - component: {fileID: 3962181621250079293}
   - component: {fileID: 5959049387417939253}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Glass001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +180,7 @@ GameObject:
   - component: {fileID: 6323041536293481799}
   - component: {fileID: 6419383194231406221}
   - component: {fileID: 4073905201690648690}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Torus001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

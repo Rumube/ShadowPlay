@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4432865284059864099}
   - component: {fileID: 4432865284059864098}
   - component: {fileID: 4432865284059864541}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Modelo_Escalera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 1387322025703328351}
   - component: {fileID: 2922743143834797539}
   - component: {fileID: 590954757202692668}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EscaleraOOOH
   m_TagString: Untagged
   m_Icon: {fileID: 0}

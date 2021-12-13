@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8104951343895671486}
   - component: {fileID: 896592952561512505}
   - component: {fileID: 6081450498159900220}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CuboLetras_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8931124822100699121}
   - component: {fileID: 8969767247007862022}
   - component: {fileID: 8969767247007862073}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Modelo_B_CuboLetras
   m_TagString: Untagged
   m_Icon: {fileID: 0}

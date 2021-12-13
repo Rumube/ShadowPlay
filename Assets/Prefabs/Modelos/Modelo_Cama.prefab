@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 880179554152153155}
   - component: {fileID: 846043245128695701}
   - component: {fileID: 846043245128695700}
-  m_Layer: 0
+  - component: {fileID: 4361975144902326527}
+  m_Layer: 3
   m_Name: Modelo_Cama
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.1, y: 49.082565, z: 69.36804}
-  m_Center: {x: -47.2, y: 24.243986, z: 0.2}
+  m_Size: {x: 4.3773026, y: 49.082565, z: 69.36804}
+  m_Center: {x: -47.33863, y: 24.243986, z: 0.2000004}
 --- !u!65 &846043245128695700
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57,8 +58,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 93.98, y: 37.941944, z: 69.36804}
-  m_Center: {x: 2.1, y: 18.673676, z: -0.61}
+  m_Size: {x: 89.8209, y: 37.941944, z: 69.36804}
+  m_Center: {x: 0.020469725, y: 18.673676, z: -0.6099999}
+--- !u!65 &4361975144902326527
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539541387465284345}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.0997386, y: 62.668888, z: 69.36804}
+  m_Center: {x: 47.34961, y: 31.037144, z: 0.2000004}
 --- !u!1 &6296397288400428409
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +84,7 @@ GameObject:
   - component: {fileID: 1815779409869874568}
   - component: {fileID: 8956546155973526373}
   - component: {fileID: 5941757942948873524}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pies_Cama
   m_TagString: Untagged
   m_Icon: {fileID: 0}

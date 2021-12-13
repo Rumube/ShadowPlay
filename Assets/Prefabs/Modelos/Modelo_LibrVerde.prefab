@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7188496873641904927}
   - component: {fileID: 2105548640389980826}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Modelo_LibrVerde
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 8370066258141714874}
   - component: {fileID: 3269354048086664170}
   - component: {fileID: 1359150220694489964}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Libro
   m_TagString: Untagged
   m_Icon: {fileID: 0}

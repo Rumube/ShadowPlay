@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9136979483245985452}
   - component: {fileID: 3191125470793792410}
   - component: {fileID: 5662516346532894269}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: QUIEROUNCAMION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2758574768124415957}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Modelo_Camion
   m_TagString: Untagged
   m_Icon: {fileID: 0}

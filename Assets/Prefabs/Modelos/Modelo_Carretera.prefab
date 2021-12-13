@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1567301039994244407}
   - component: {fileID: 3582955956789539544}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Modelo_Carretera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 5449562221068886527}
   - component: {fileID: 7580245037417341591}
   - component: {fileID: 2018432530476699353}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Carretera_recta
   m_TagString: Untagged
   m_Icon: {fileID: 0}

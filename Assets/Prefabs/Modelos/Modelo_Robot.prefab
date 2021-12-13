@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6756904838298848643}
   - component: {fileID: 6287774351937994642}
   - component: {fileID: 7748595041940542381}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3827012462067668888}
   - component: {fileID: 4501139610855079957}
   - component: {fileID: 1297616144046079821}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Modelo_Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

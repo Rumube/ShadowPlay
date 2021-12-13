@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2716218467885056505}
   - component: {fileID: 8991037031762164649}
   - component: {fileID: 4847328165749822255}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Libro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3628541708969349980}
   - component: {fileID: 3641616423935490111}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Modelo_LibroAzul
   m_TagString: Untagged
   m_Icon: {fileID: 0}
