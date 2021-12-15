@@ -107,12 +107,19 @@ public class rbCharapter : MonoBehaviour
                 
         }
     }
-    
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag=="Muelle")
+        {
+            _body.AddForce(transform.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
+        }
+    }
     public float Get_health
     {
         get { return health; }
         set { health = value; }
     }
-
+    
+    
 }

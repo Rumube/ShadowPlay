@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7188496873641904927}
   - component: {fileID: 2105548640389980826}
   m_Layer: 3
-  m_Name: Modelo_LibrVerde
+  m_Name: Modelo_LibroVerde
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
