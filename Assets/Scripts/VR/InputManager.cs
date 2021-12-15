@@ -26,7 +26,7 @@ public class InputManager : MonoBehaviour
     bool _isCreateSpring = false;
 
     public GameObject _visorHelp;
-    //Zona de creación en la que nos encontramos
+    //Zona de creaciï¿½n en la que nos encontramos
     GameObject _currentCreateZone;
 
     // Start is called before the first frame update
@@ -43,9 +43,9 @@ public class InputManager : MonoBehaviour
         if(_leftTrigger && _rightTrigger)
         {
             _visorHelp.SetActive(true);
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.gameObject.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.gameObject.transform.TransformDirection(Vector3.forward- new Vector3(0, 0.35f, 0)), out hit, Mathf.Infinity))
             {
-                Debug.DrawRay(Camera.main.transform.position, Camera.main.gameObject.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                Debug.DrawRay(Camera.main.transform.position, Camera.main.gameObject.transform.TransformDirection(Vector3.forward - new Vector3(0, 0.35f, 0)) * hit.distance, Color.yellow);
                 _visorHelp.transform.position = hit.point;
                 _isCreatingZone = false;
                 foreach (GameObject currentGO in _createZoneList)
