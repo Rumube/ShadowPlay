@@ -112,7 +112,10 @@ public class rbCharapter : MonoBehaviour
     {
         if (collision.gameObject.tag=="Muelle")
         {
+
             _body.AddForce(transform.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
+            //collision.gameObject.GetComponent<Animator>().SetBool("Touch", true);
+            collision.gameObject.GetComponent<Animator>().Play("Muelle");
         }
     }
     public float Get_health
