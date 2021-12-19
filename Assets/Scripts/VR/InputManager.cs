@@ -48,21 +48,28 @@ public class InputManager : MonoBehaviour
                 Debug.DrawRay(Camera.main.transform.position, Camera.main.gameObject.transform.TransformDirection(Vector3.forward - new Vector3(0, 0.35f, 0)) * hit.distance, Color.yellow);
                 _visorHelp.transform.position = hit.point;
                 _isCreatingZone = false;
+                float distanceMin = _hitZoneDistance;
                 foreach (GameObject currentGO in _createZoneList)
                 {
-                    if (Vector3.Distance(hit.point, currentGO.transform.position) <= _hitZoneDistance)
+                    float currentDistance = Vector3.Distance(hit.point, currentGO.transform.position);
+                    if (currentDistance <= _hitZoneDistance && currentDistance <= distanceMin)
                     {
+                        distanceMin = currentDistance;
                         _isCreatingZone = true;
-                        currentGO.transform.GetChild(0).gameObject.SetActive(true);
+                        //currentGO.transform.GetChild(0).gameObject.SetActive(true);
                         _currentCreateZone = currentGO;
                     }
                     else
                     {
-                        if (_currentCreateZone.activeSelf)
-                            _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
-                        currentGO.transform.GetChild(0).gameObject.SetActive(false);
+                        DesactiveCreationZone(currentGO);
                     }
                 }
+                foreach(GameObject currentGO in _createZoneList)
+                {
+                    if(_currentCreateZone != currentGO)
+                        DesactiveCreationZone(currentGO);
+                }
+                _currentCreateZone.transform.GetChild(0).gameObject.SetActive(true);
             }
             else
             {
@@ -85,6 +92,13 @@ public class InputManager : MonoBehaviour
             }
         }
 
+    }
+
+    private void DesactiveCreationZone(GameObject currentGO)
+    {
+        if (_currentCreateZone.activeSelf)
+            _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
+        currentGO.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -254,20 +268,36 @@ public class InputManager : MonoBehaviour
     void createCloud()
     {
         print("Crear nube");
+        GameObject newGO = Instantiate(_currentCreateZone.GetComponent<CreateObjectZone>()._objectsToCreate[0], _currentCreateZone.transform);
+        _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
+        _currentCreateZone.GetComponent<CreateObjectZone>()._isObjectCreated = true;
+        newGO.SetActive(true);
     }
 
     void createBook()
     {
         print("Crear libro");
+        GameObject newGO = Instantiate(_currentCreateZone.GetComponent<CreateObjectZone>()._objectsToCreate[2], _currentCreateZone.transform);
+        _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
+        _currentCreateZone.GetComponent<CreateObjectZone>()._isObjectCreated = true;
+        newGO.SetActive(true);
     }
 
     void createCube()
     {
         print("Crear cubo");
+        GameObject newGO = Instantiate(_currentCreateZone.GetComponent<CreateObjectZone>()._objectsToCreate[1], _currentCreateZone.transform);
+        _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
+        _currentCreateZone.GetComponent<CreateObjectZone>()._isObjectCreated = true;
+        newGO.SetActive(true);
     }
 
     void createSpring()
     {
         print("Crear muelle");
+        GameObject newGO = Instantiate(_currentCreateZone.GetComponent<CreateObjectZone>()._objectsToCreate[3], _currentCreateZone.transform);
+        _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
+        _currentCreateZone.GetComponent<CreateObjectZone>()._isObjectCreated = true;
+        newGO.SetActive(true);
     }
 }

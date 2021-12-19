@@ -9,6 +9,7 @@ public class CreateObjectZone : MonoBehaviour
     public GameObject[] _objectsToCreate = new GameObject[4];
     bool _isCreating;
     Animator _anim;
+    public bool _isObjectCreated;
     // Start is called before the first frame update
     void Start()
     {
