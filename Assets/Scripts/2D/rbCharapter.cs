@@ -42,7 +42,7 @@ public class rbCharapter : MonoBehaviour
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
             _isGrounded = true;
-            //Debug.Log("Did Hit");
+           // Debug.Log("Did Hit");
         }
         else
         {
@@ -68,12 +68,12 @@ public class rbCharapter : MonoBehaviour
         {
             if (_inputs.x > 0)
             {
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 0.2f);
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 0.1f);
                 _isRight = false;
             }
             else if (_inputs.x < 0)
             {
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, -0.2f);
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, -0.1f);
                 _isRight = true;
             }
             transform.localPosition += new Vector3(_inputs.x * Time.deltaTime * Speed, 0, 0);
@@ -112,12 +112,15 @@ public class rbCharapter : MonoBehaviour
     {
         if (collision.gameObject.tag=="Muelle")
         {
+            
 
             _body.AddForce(transform.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
             //collision.gameObject.GetComponent<Animator>().SetBool("Touch", true);
             collision.gameObject.GetComponent<Animator>().Play("Muelle");
         }
     }
+
+  
     public float Get_health
     {
         get { return health; }
