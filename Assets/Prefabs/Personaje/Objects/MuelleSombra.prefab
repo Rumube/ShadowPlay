@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7222170160988018413}
   m_Layer: 0
   m_Name: MuelleSombra
-  m_TagString: Untagged
+  m_TagString: ObjetosParaCrear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

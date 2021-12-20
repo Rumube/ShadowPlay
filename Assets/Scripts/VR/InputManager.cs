@@ -13,6 +13,8 @@ public class InputManager : MonoBehaviour
     bool _isCreatingZone;
     bool _leftTrigger;
     bool _rightTrigger;
+    bool _leftDeleteButton;
+    bool _rightDeleteButton;
     Vector3 _leftRotation;
     Vector3 _rightRotation;
     Vector3 _leftPosition;
@@ -25,10 +27,14 @@ public class InputManager : MonoBehaviour
     bool _isCreateCube = false;
     bool _isCreateSpring = false;
 
+
     public GameObject _visorHelp;
     //Zona de creaci�n en la que nos encontramos
     GameObject _currentCreateZone;
-
+    List<GameObject> _createList = new List<GameObject>();
+    //Delete
+    public float _timeToDelete;
+    float _currentDeleteTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,10 +46,10 @@ public class InputManager : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(_leftTrigger && _rightTrigger)
+        if (_leftTrigger && _rightTrigger)
         {
             _visorHelp.SetActive(true);
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.gameObject.transform.TransformDirection(Vector3.forward- new Vector3(0, 0.35f, 0)), out hit, Mathf.Infinity))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.gameObject.transform.TransformDirection(Vector3.forward - new Vector3(0, 0.35f, 0)), out hit, Mathf.Infinity))
             {
                 Debug.DrawRay(Camera.main.transform.position, Camera.main.gameObject.transform.TransformDirection(Vector3.forward - new Vector3(0, 0.35f, 0)) * hit.distance, Color.yellow);
                 _visorHelp.transform.position = hit.point;
@@ -64,9 +70,9 @@ public class InputManager : MonoBehaviour
                         DesactiveCreationZone(currentGO);
                     }
                 }
-                foreach(GameObject currentGO in _createZoneList)
+                foreach (GameObject currentGO in _createZoneList)
                 {
-                    if(_currentCreateZone != currentGO)
+                    if (_currentCreateZone != currentGO)
                         DesactiveCreationZone(currentGO);
                 }
                 _currentCreateZone.transform.GetChild(0).gameObject.SetActive(true);
@@ -108,7 +114,7 @@ public class InputManager : MonoBehaviour
         InputDetection();
         VRActions();
 
-        if(_isCreateBook || _isCreateCloud || _isCreateCube || _isCreateSpring)
+        if (_isCreateBook || _isCreateCloud || _isCreateCube || _isCreateSpring)
         {
             _prueba.gameObject.SetActive(true);
         }
@@ -145,9 +151,19 @@ public class InputManager : MonoBehaviour
             //PRIMARY BUTTOM
             if (GameManager.Instance._lefDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryLeftButtomValue) && primaryLeftButtomValue)
             {
+                _leftDeleteButton = primaryLeftButtomValue;
+            }
+            else
+            {
+                _leftDeleteButton = false;
             }
             if (GameManager.Instance._rigDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryRightButtomValue) && primaryRightButtomValue)
             {
+                _rightDeleteButton = primaryRightButtomValue;
+            }
+            else
+            {
+                _rightDeleteButton = false;
             }
 
             //TRIGGER
@@ -192,112 +208,106 @@ public class InputManager : MonoBehaviour
 
     void VRActions()
     {
-        //CREAR OBJETOS
-        if (_isCreatingZone)
+        #region Delete
+
+        print("Num:" + _createList.Count);
+
+        if(_rightDeleteButton && _leftDeleteButton)
         {
-            //CLOUD INPUT
-            if (_leftTrigger && _rightTrigger && _rightRotation.z >= 190 && _rightRotation.z <= 310 && _leftRotation.z >= 20 && _leftRotation.z <= 140)
+            _currentDeleteTime -= Time.deltaTime;
+            if(_currentDeleteTime <= 0)
             {
-                _isCreateCloud = true;
-                //MOSTRAR ELEMENTO
-                _currentCreateZone.GetComponent<CreateObjectZone>().InitCreation(0);
-            }
-            else
-            {
-                if (_isCreateCloud && _rightRotation.z >= 190 && _rightRotation.z <= 310 && _leftRotation.z >= 20 && _leftRotation.z <= 140)
+                if(_createList.Count != 0)
                 {
-                    createCloud();
+                    _createList.Remove(_createList[_createList.Count-1]);
+                    _currentDeleteTime = _timeToDelete;
                 }
-                _isCreateCloud = false;
-            }
-
-            //BOOK INPUT
-            if (_leftTrigger && _rightTrigger && _rightRotation.z >= 20 && _rightRotation.z <= 120 && _leftRotation.z >= 240 && _leftRotation.z <= 340)
-            {
-                _isCreateBook = true;
-                //MOSTRAR ELEMENTO
-                _currentCreateZone.GetComponent<CreateObjectZone>().InitCreation(2);
-            }
-            else
-            {
-                if (_isCreateBook && _rightRotation.z >= 20 && _rightRotation.z <= 120 && _leftRotation.z >= 240 && _leftRotation.z <= 340)
-                {
-                    createBook();
-                }
-                _isCreateBook = false;
-            }
-            float dist = Vector3.Distance(_rightPosition, _leftPosition);
-
-            //CUBE INPUT
-            if (_leftTrigger && _rightTrigger && _rightTrigger && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
-                dist > 0.3f && dist <= 0.7f)
-            {
-                _isCreateCube = true;
-                //MOSTRAR ELEMENTO
-                _currentCreateZone.GetComponent<CreateObjectZone>().InitCreation(1);
-            }
-            else
-            {
-                if (_isCreateCube && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
-                   dist > 0.3f && dist <= 0.7f)
-                {
-                    createCube();
-                }
-                _isCreateCube = false;
-            }
-            //SpringInput
-            if (_leftTrigger && _rightTrigger && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
-                dist >= 0f && dist <= 0.2f && Mathf.Abs(Mathf.Abs(_leftPosition.y) - Mathf.Abs(_rightPosition.y)) >= 0.15f && Mathf.Abs(Mathf.Abs(_leftPosition.y) - Mathf.Abs(_rightPosition.y)) <= 0.25f)
-            {
-                _isCreateSpring = true;
-                //MOSTRAR ELEMENTO
-                _currentCreateZone.GetComponent<CreateObjectZone>().InitCreation(3);
-            }
-            else
-            {
-                if (_isCreateSpring && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
-                dist >= 0f && dist <= 0.2f)
-                {
-                    createSpring();
-                }
-                _isCreateSpring = false;
             }
         }
+        else
+        {
+            _currentDeleteTime = _timeToDelete;
+        }
+        #endregion
+        #region Create
+        if (!_currentCreateZone.GetComponent<CreateObjectZone>()._isObjectCreated)
+        {
+            //CREAR OBJETOS
+            if (_isCreatingZone)
+            {
+                //CLOUD INPUT
+                if (_leftTrigger && _rightTrigger && _rightRotation.z >= 190 && _rightRotation.z <= 310 && _leftRotation.z >= 20 && _leftRotation.z <= 140)
+                {
+                    _isCreateCloud = true;
+                    //MOSTRAR ELEMENTO
+                    _currentCreateZone.GetComponent<CreateObjectZone>().InitCreation(0);
+                }
+                else
+                {
+                    if (_isCreateCloud && _rightRotation.z >= 190 && _rightRotation.z <= 310 && _leftRotation.z >= 20 && _leftRotation.z <= 140)
+                    {
+                        _currentCreateZone.GetComponent<CreateObjectZone>().createCloud();
+                        _createList.Add(_currentCreateZone);
+                    }
+                    _isCreateCloud = false;
+                }
 
-    }
-    void createCloud()
-    {
-        print("Crear nube");
-        GameObject newGO = Instantiate(_currentCreateZone.GetComponent<CreateObjectZone>()._objectsToCreate[0], _currentCreateZone.transform);
-        _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
-        _currentCreateZone.GetComponent<CreateObjectZone>()._isObjectCreated = true;
-        newGO.SetActive(true);
-    }
+                //BOOK INPUT
+                if (_leftTrigger && _rightTrigger && _rightRotation.z >= 20 && _rightRotation.z <= 120 && _leftRotation.z >= 240 && _leftRotation.z <= 340)
+                {
+                    _isCreateBook = true;
+                    //MOSTRAR ELEMENTO
+                    _currentCreateZone.GetComponent<CreateObjectZone>().InitCreation(2);
+                }
+                else
+                {
+                    if (_isCreateBook && _rightRotation.z >= 20 && _rightRotation.z <= 120 && _leftRotation.z >= 240 && _leftRotation.z <= 340)
+                    {
+                        _currentCreateZone.GetComponent<CreateObjectZone>().createBook();
+                        _createList.Add(_currentCreateZone);
+                    }
+                    _isCreateBook = false;
+                }
+                float dist = Vector3.Distance(_rightPosition, _leftPosition);
 
-    void createBook()
-    {
-        print("Crear libro");
-        GameObject newGO = Instantiate(_currentCreateZone.GetComponent<CreateObjectZone>()._objectsToCreate[2], _currentCreateZone.transform);
-        _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
-        _currentCreateZone.GetComponent<CreateObjectZone>()._isObjectCreated = true;
-        newGO.SetActive(true);
-    }
-
-    void createCube()
-    {
-        print("Crear cubo");
-        GameObject newGO = Instantiate(_currentCreateZone.GetComponent<CreateObjectZone>()._objectsToCreate[1], _currentCreateZone.transform);
-        _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
-        _currentCreateZone.GetComponent<CreateObjectZone>()._isObjectCreated = true;
-        newGO.SetActive(true);
-    }
-
-    void createSpring()
-    {
-        print("Crear muelle");
-        GameObject newGO = Instantiate(_currentCreateZone.GetComponent<CreateObjectZone>()._objectsToCreate[3], _currentCreateZone.transform);
-        _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
-        _currentCreateZone.GetComponent<CreateObjectZone>()._isObjectCreated = true;
-        newGO.SetActive(true);
+                //CUBE INPUT
+                if (_leftTrigger && _rightTrigger && _rightTrigger && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
+                    dist > 0.3f && dist <= 0.7f)
+                {
+                    _isCreateCube = true;
+                    //MOSTRAR ELEMENTO
+                    _currentCreateZone.GetComponent<CreateObjectZone>().InitCreation(1);
+                }
+                else
+                {
+                    if (_isCreateCube && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
+                       dist > 0.3f && dist <= 0.7f)
+                    {
+                        _currentCreateZone.GetComponent<CreateObjectZone>().createCube();
+                        _createList.Add(_currentCreateZone);
+                    }
+                    _isCreateCube = false;
+                }
+                //SpringInput
+                if (_leftTrigger && _rightTrigger && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
+                    dist >= 0f && dist <= 0.2f && Mathf.Abs(Mathf.Abs(_leftPosition.y) - Mathf.Abs(_rightPosition.y)) >= 0.15f && Mathf.Abs(Mathf.Abs(_leftPosition.y) - Mathf.Abs(_rightPosition.y)) <= 0.25f)
+                {
+                    _isCreateSpring = true;
+                    //MOSTRAR ELEMENTO
+                    _currentCreateZone.GetComponent<CreateObjectZone>().InitCreation(3);
+                }
+                else
+                {
+                    if (_isCreateSpring && _rightRotation.z <= 360 && _rightRotation.z >= 340 && _leftRotation.z <= 30 && _leftRotation.z >= 0 &&
+                    dist >= 0f && dist <= 0.2f)
+                    {
+                        _currentCreateZone.GetComponent<CreateObjectZone>().createSpring();
+                        _createList.Add(_currentCreateZone);
+                    }
+                    _isCreateSpring = false;
+                }
+            }
+        }
+        #endregion
     }
 }

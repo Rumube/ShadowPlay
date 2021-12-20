@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1464916198496692534}
   m_Layer: 0
   m_Name: CuboSombra
-  m_TagString: Untagged
+  m_TagString: ObjetosParaCrear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
