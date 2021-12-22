@@ -219,6 +219,7 @@ public class InputManager : MonoBehaviour
             {
                 if(_createList.Count != 0)
                 {
+                    _createList[_createList.Count - 1].GetComponent<CreateObjectZone>().DestroyObject();
                     _createList.Remove(_createList[_createList.Count-1]);
                     _currentDeleteTime = _timeToDelete;
                 }
