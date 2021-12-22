@@ -8574,6 +8574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1324621368}
+  - component: {fileID: 1324621369}
   m_Layer: 0
   m_Name: 2DWorld
   m_TagString: Untagged
@@ -8602,6 +8603,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1324621369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324621367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9257056fc4068740822cf3059584670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _VRCamera: {fileID: 784050269}
+  _velRotation: 90
+  _velDist: 5
+  _maxDist: -0.5
+  _minDist: -3
+  _velHeight: 5
+  _maxHeight: 3
+  _minHeight: 0
 --- !u!1001 &1352095568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11525,6 +11546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e684b4b93db7350449db304d4e8462cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _2DMovement: {fileID: 1324621369}
   _prueba: {fileID: 787654112}
   _hitZoneDistance: 0.3
   _visorHelp: {fileID: 1280222113}

@@ -5,6 +5,8 @@ using UnityEngine.XR;
 
 public class InputManager : MonoBehaviour
 {
+    [Header("Referencias")]
+    public Movement2DWorld _2DMovement;
 
     public Light _prueba;
     [Header("Conf")]
@@ -180,10 +182,21 @@ public class InputManager : MonoBehaviour
             //TOUCHPAD
             if (GameManager.Instance._lefDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 primaryLeft2DAxisValue) && primaryLeft2DAxisValue != Vector2.zero)
             {
-                GameManager.Instance._cubo.transform.RotateAround(GameManager.Instance._cubo.transform.position, -GameManager.Instance._cubo.transform.up, Time.deltaTime * 90f * primaryLeft2DAxisValue.x);
+                _2DMovement.Rotate2DWorld(primaryLeft2DAxisValue.x);
             }
             if (GameManager.Instance._rigDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 primaryRight2DAxisValue) && primaryRight2DAxisValue != Vector2.zero)
             {
+                _2DMovement.ChangeDist2DWorld(primaryRight2DAxisValue.y);
+            }
+
+            //GRIP
+            if(GameManager.Instance._lefDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripLeftValue) && gripLeftValue)
+            {
+                _2DMovement.ChangeHeight2DWorld(true);
+            }
+            if(GameManager.Instance._rigDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripRightValue) && gripRightValue)
+            {
+                _2DMovement.ChangeHeight2DWorld(false);
             }
         }
     }
@@ -209,9 +222,6 @@ public class InputManager : MonoBehaviour
     void VRActions()
     {
         #region Delete
-
-        print("Num:" + _createList.Count);
-
         if(_rightDeleteButton && _leftDeleteButton)
         {
             _currentDeleteTime -= Time.deltaTime;
