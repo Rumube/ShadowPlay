@@ -29,14 +29,14 @@ public class Movement2DWorld : MonoBehaviour
 
     public void Rotate2DWorld(float rotationValue)
     {
-        transform.RotateAround(transform.position, transform.up, Time.deltaTime * _velRotation * rotationValue);
+        _VRCamera.transform.RotateAround(transform.position, _VRCamera.transform.up, Time.deltaTime * _velRotation * rotationValue);
     }
 
     public void ChangeDist2DWorld(float distanceValue)
     {
         float newZ = Mathf.Clamp(_VRCamera.transform.position.z + distanceValue * Time.deltaTime * _velDist, _minDist, _maxDist);
         float newY = _VRCamera.transform.position.y;
-        _VRCamera.transform.position = new Vector3(0, newY, newZ);
+        _VRCamera.transform.position = new Vector3(_VRCamera.transform.position.x, newY, newZ);
     }
 
     public void ChangeHeight2DWorld(bool heightValue)
@@ -45,15 +45,13 @@ public class Movement2DWorld : MonoBehaviour
         float newY = 0;
         if (heightValue)
         {
-            print("Sube");
            newY = Mathf.Clamp(_VRCamera.transform.position.y + _velHeight * Time.deltaTime * _velHeight, _minHeight, _maxHeight);
         }
         else
         {
-            print("Sube");
             newY = Mathf.Clamp(_VRCamera.transform.position.y - _velHeight * Time.deltaTime * _velHeight, _minHeight, _maxHeight);
         }
-        _VRCamera.transform.position = new Vector3(0, newY, newZ);
+        _VRCamera.transform.position = new Vector3(_VRCamera.transform.position.x, newY, newZ);
     }
 
 }

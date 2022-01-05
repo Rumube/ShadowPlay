@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20837422, g: 0.20837422, b: 0.20837422, a: 1}
+  m_IndirectSpecularColor: {r: 0.15128867, g: 0.12290862, b: 0.16289723, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -741,21 +741,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2003592880346922862, guid: f82a1bb4d3ce51d42a021515c05c2717,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2003592880346922862, guid: f82a1bb4d3ce51d42a021515c05c2717,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2003592880346922862, guid: f82a1bb4d3ce51d42a021515c05c2717,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2003592880346922862, guid: f82a1bb4d3ce51d42a021515c05c2717,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.043
       objectReference: {fileID: 0}
@@ -864,7 +849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 255356315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera Offset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11332,7 +11317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 784050271}
   - component: {fileID: 784050270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: XR Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11366,7 +11351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784050269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: -2.38}
+  m_LocalPosition: {x: 0, y: 1.8, z: -0.69}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 255356315}
@@ -11385,7 +11370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 787654113}
   - component: {fileID: 787654112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prueba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12588,7 +12573,7 @@ GameObject:
   - component: {fileID: 1033959943}
   - component: {fileID: 1033959942}
   - component: {fileID: 1033959941}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Locomotion System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13424,9 +13409,9 @@ MonoBehaviour:
   _VRCamera: {fileID: 784050269}
   _velRotation: 90
   _velDist: 5
-  _maxDist: -0.5
-  _minDist: -3
-  _velHeight: 5
+  _maxDist: 6
+  _minDist: -6
+  _velHeight: 3
   _maxHeight: 3
   _minHeight: 0
 --- !u!1001 &1352095568
@@ -13948,7 +13933,7 @@ GameObject:
   - component: {fileID: 1544997179}
   - component: {fileID: 1544997178}
   - component: {fileID: 1544997177}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftHand Controller
   m_TagString: LeftHand
   m_Icon: {fileID: 0}
@@ -14738,6 +14723,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 255750844}
     m_Modifications:
+    - target: {fileID: 1027166607, guid: d58a85d8df1f7614eb4daf48e18a022e, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7467702760826971013, guid: d58a85d8df1f7614eb4daf48e18a022e,
         type: 3}
       propertyPath: m_Name
@@ -14776,7 +14765,7 @@ PrefabInstance:
     - target: {fileID: 7847888165707446591, guid: d58a85d8df1f7614eb4daf48e18a022e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.259
+      value: 2.382
       objectReference: {fileID: 0}
     - target: {fileID: 7847888165707446591, guid: d58a85d8df1f7614eb4daf48e18a022e,
         type: 3}
@@ -15267,7 +15256,7 @@ GameObject:
   - component: {fileID: 1780939613}
   - component: {fileID: 1780939612}
   - component: {fileID: 1780939617}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -16308,7 +16297,7 @@ GameObject:
   - component: {fileID: 2055198657}
   - component: {fileID: 2055198656}
   - component: {fileID: 2055198655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightHand Controller
   m_TagString: RightHand
   m_Icon: {fileID: 0}
@@ -16828,7 +16817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2122481310}
   - component: {fileID: 2122481311}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KeyboardController
   m_TagString: Untagged
   m_Icon: {fileID: 0}

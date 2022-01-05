@@ -106,6 +106,8 @@ public class rbCharapter : MonoBehaviour
             }
                 
         }
+
+        //transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
     private void OnCollisionEnter(Collision collision)
