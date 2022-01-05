@@ -105,7 +105,10 @@ public class InputManager : MonoBehaviour
     private void DesactiveCreationZone(GameObject currentGO)
     {
         if (_currentCreateZone.activeSelf)
+        {
+            _currentCreateZone.GetComponent<AudioSource>().Stop();
             _currentCreateZone.GetComponent<CreateObjectZone>().StopCreation();
+        }
         currentGO.transform.GetChild(0).gameObject.SetActive(false);
     }
 
