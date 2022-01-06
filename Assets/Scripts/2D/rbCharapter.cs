@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class rbCharapter : MonoBehaviour
 {
@@ -35,6 +36,10 @@ public class rbCharapter : MonoBehaviour
 
     void Update()
     {
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("LostScreen");
+        }
         //MOVIMIENTO
         RaycastHit hit;
 
@@ -112,6 +117,10 @@ public class rbCharapter : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Enemigo")
+        {
+            health -= 1;
+        }
         if (collision.gameObject.tag=="Muelle")
         {
             
@@ -121,8 +130,13 @@ public class rbCharapter : MonoBehaviour
             collision.gameObject.GetComponent<Animator>().Play("Muelle");
         }
     }
-
-  
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Trampa")
+        {
+            health -= 1;
+        }
+    }
     public float Get_health
     {
         get { return health; }

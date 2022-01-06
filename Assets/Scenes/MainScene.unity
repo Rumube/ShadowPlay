@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.15128867, g: 0.12290862, b: 0.16289723, a: 1}
+  m_IndirectSpecularColor: {r: 0.20825139, g: 0.20825139, b: 0.20825139, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11174,22 +11174,22 @@ PrefabInstance:
     - target: {fileID: 5202105219707997608, guid: 4c49438c7f4af994c93a396574b24d97,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7109996
+      value: 0.7109389
       objectReference: {fileID: 0}
     - target: {fileID: 5202105219707997608, guid: 4c49438c7f4af994c93a396574b24d97,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1649994
+      value: 1.1649988
       objectReference: {fileID: 0}
     - target: {fileID: 5202105219707997608, guid: 4c49438c7f4af994c93a396574b24d97,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9999619
       objectReference: {fileID: 0}
     - target: {fileID: 5202105219707997608, guid: 4c49438c7f4af994c93a396574b24d97,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.008727774
       objectReference: {fileID: 0}
     - target: {fileID: 5202105219707997608, guid: 4c49438c7f4af994c93a396574b24d97,
         type: 3}
@@ -11204,7 +11204,7 @@ PrefabInstance:
     - target: {fileID: 5202105219707997608, guid: 4c49438c7f4af994c93a396574b24d97,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202105219707997608, guid: 4c49438c7f4af994c93a396574b24d97,
         type: 3}
@@ -13328,6 +13328,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 2.322
       objectReference: {fileID: 0}
+    - target: {fileID: 8899734060525284422, guid: 9ecc7f0a04a6a254f85aa03c34360243,
+        type: 3}
+      propertyPath: m_TagString
+      value: Trampa
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ecc7f0a04a6a254f85aa03c34360243, type: 3}
 --- !u!4 &1286094028 stripped
@@ -13382,7 +13387,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310472827}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 27.178362, y: 16.048729, z: 8.764279}
@@ -14959,7 +14964,7 @@ PrefabInstance:
     - target: {fileID: 7939519300487998846, guid: d58a85d8df1f7614eb4daf48e18a022e,
         type: 3}
       propertyPath: GroundDistance
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d58a85d8df1f7614eb4daf48e18a022e, type: 3}
@@ -15859,6 +15864,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Modelo_LegoVerde_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 189875649348555676, guid: 40a123dd5f127654ea247239d5e0ece1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Trampa
       objectReference: {fileID: 0}
     - target: {fileID: 5350468493096632170, guid: 40a123dd5f127654ea247239d5e0ece1,
         type: 3}
@@ -18245,6 +18255,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 255750844}
     m_Modifications:
+    - target: {fileID: 1188264920877433966, guid: 6b05c6d7da6b25143b1951161b8241af,
+        type: 3}
+      propertyPath: m_TagString
+      value: Trampa
+      objectReference: {fileID: 0}
     - target: {fileID: 1960825102702829268, guid: 6b05c6d7da6b25143b1951161b8241af,
         type: 3}
       propertyPath: m_LocalPosition.x

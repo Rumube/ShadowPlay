@@ -11,6 +11,7 @@ TagManager:
   - CreateZone
   - Muelle
   - ObjetosParaCrear
+  - Trampa
   layers:
   - Default
   - TransparentFX
