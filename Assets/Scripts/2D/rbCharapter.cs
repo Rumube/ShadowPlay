@@ -27,14 +27,22 @@ public class rbCharapter : MonoBehaviour
     public float objectdistance;
     Rigidbody _lastGrab;
 
+
+    //ANIMATIONS
+    public Animator anim;
+    public new AnimationClip[] animations;
+
     void Start()
     {
         _body = GetComponent<Rigidbody>();
         _isRight = true;
+        anim = GetComponent<Animator>();
+
     }
 
     void Update()
     {
+
         //MOVIMIENTO
         RaycastHit hit;
 
@@ -42,13 +50,14 @@ public class rbCharapter : MonoBehaviour
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
             _isGrounded = true;
-           // Debug.Log("Did Hit");
+
         }
         else
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
-            //Debug.Log("Did not Hit");
+            
             _isGrounded = false;
+            
         }
         
         
@@ -56,6 +65,14 @@ public class rbCharapter : MonoBehaviour
         if ((Input.GetButtonDown("Jump"))&&( _isGrounded==true))
         {
             _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
+            anim.SetBool("salto", true);
+
+
+        }
+        else
+        {
+            anim.SetBool("salto", false);
+
         }
 
 
@@ -70,13 +87,28 @@ public class rbCharapter : MonoBehaviour
             {
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 0.1f);
                 _isRight = false;
+                anim.SetBool("run", true);
+
+
             }
             else if (_inputs.x < 0)
             {
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, -0.1f);
                 _isRight = true;
+                anim.SetBool("run", true);
+
+
+
             }
             transform.localPosition += new Vector3(_inputs.x * Time.deltaTime * Speed, 0, 0);
+        }
+        else
+        {
+            anim.SetBool("run", false);
+
+            //anim.enabled = false;
+            //anim.enabled = true;
+            //anim.Play("idle");
         }
 
         _playerLight.transform.LookAt(transform);
@@ -95,6 +127,7 @@ public class rbCharapter : MonoBehaviour
             hit.collider.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             print("Grab: " + hit.collider.gameObject.name);
             _lastGrab = hit.collider.gameObject.GetComponent<Rigidbody>();
+            anim.Play("Empuje1");
         }
         else
         {
@@ -107,7 +140,6 @@ public class rbCharapter : MonoBehaviour
                 
         }
 
-        //transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
     private void OnCollisionEnter(Collision collision)
