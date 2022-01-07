@@ -12,6 +12,7 @@ TagManager:
   - Muelle
   - ObjetosParaCrear
   - Trampa
+  - luz
   layers:
   - Default
   - TransparentFX

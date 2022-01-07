@@ -13,9 +13,9 @@ public class rbCharapter : MonoBehaviour
     public float JumpHeight = 2f;
     public float GroundDistance = 1f;
     public float DashDistance = 5f;
-    public float health= 5;
-   
-    
+    public float health = 5;
+    public float charge= 5;
+
     [Header("CHECK")]
     //MOVIMIENTO
     private Rigidbody _body;
@@ -31,7 +31,6 @@ public class rbCharapter : MonoBehaviour
 
     //ANIMATIONS
     public Animator anim;
-    public new AnimationClip[] animations;
 
     void Start()
     {
@@ -43,14 +42,16 @@ public class rbCharapter : MonoBehaviour
 
     void Update()
     {
-<<<<<<< HEAD
+        carga();
 
-=======
+
         if (health <= 0)
         {
-            SceneManager.LoadScene("LostScreen");
+            anim.SetBool("dead", true);
+
+            StartCoroutine(waitForDead());
+
         }
->>>>>>> main
         //MOVIMIENTO
         RaycastHit hit;
 
@@ -63,14 +64,14 @@ public class rbCharapter : MonoBehaviour
         else
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
-            
+
             _isGrounded = false;
-            
+
         }
-        
-        
-        
-        if ((Input.GetButtonDown("Jump"))&&( _isGrounded==true))
+
+
+
+        if ((Input.GetButtonDown("Jump")) && (_isGrounded == true))
         {
             _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
             anim.SetBool("salto", true);
@@ -114,9 +115,7 @@ public class rbCharapter : MonoBehaviour
         {
             anim.SetBool("run", false);
 
-            //anim.enabled = false;
-            //anim.enabled = true;
-            //anim.Play("idle");
+
         }
 
         _playerLight.transform.LookAt(transform);
@@ -127,7 +126,7 @@ public class rbCharapter : MonoBehaviour
         Vector3 direccion = Vector3.forward;
         if (_isRight)
             direccion = -Vector3.forward;
-            
+
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(direccion), out hit, objectdistance, wall) && Input.GetKey(KeyCode.E))
         {
@@ -135,7 +134,8 @@ public class rbCharapter : MonoBehaviour
             hit.collider.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             print("Grab: " + hit.collider.gameObject.name);
             _lastGrab = hit.collider.gameObject.GetComponent<Rigidbody>();
-            anim.Play("Empuje1");
+            anim.SetBool("empuje1", true);
+
         }
         else
         {
@@ -145,8 +145,11 @@ public class rbCharapter : MonoBehaviour
                 _lastGrab.isKinematic = true;
                 _lastGrab = null;
             }
-                
+            anim.SetBool("empuje1", false);
+
         }
+
+
 
     }
 
@@ -155,14 +158,18 @@ public class rbCharapter : MonoBehaviour
         if (collision.gameObject.tag == "Enemigo")
         {
             health -= 1;
+            anim.SetBool("golpe", true);
+
         }
-        if (collision.gameObject.tag=="Muelle")
+        if (collision.gameObject.tag == "Muelle")
         {
-            
+
 
             _body.AddForce(transform.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
             //collision.gameObject.GetComponent<Animator>().SetBool("Touch", true);
             collision.gameObject.GetComponent<Animator>().Play("Muelle");
+            anim.SetTrigger("salto2");
+
         }
     }
     private void OnCollisionStay(Collision collision)
@@ -170,13 +177,49 @@ public class rbCharapter : MonoBehaviour
         if (collision.gameObject.tag == "Trampa")
         {
             health -= 1;
+            anim.SetBool("golpe", true);
+
         }
+
     }
     public float Get_health
     {
         get { return health; }
         set { health = value; }
     }
-    
-    
+
+    IEnumerator waitForDead()
+    {
+
+        yield return new WaitForSeconds(5);
+
+        SceneManager.LoadScene("LostScreen");
+
+
+    }
+
+    void carga()
+    {
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            charge = 5;
+            charge -= Time.deltaTime;
+            anim.SetBool("carga", true);
+
+            if (charge <= 0)
+            {
+                health += 1;
+                GameObject luz = GameObject.FindGameObjectWithTag("luz");
+                luz.GetComponent<Light>().intensity -= 0.2f;
+            }
+        }
+        else
+        {
+            anim.SetBool("carga", false);
+
+        }
+    }
+
+
 }
