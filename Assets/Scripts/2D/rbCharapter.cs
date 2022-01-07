@@ -198,10 +198,10 @@ public class rbCharapter : MonoBehaviour
 
     }
 
-    void carga()
+    public void carga()
     {
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.Q))
         {
             charge = 5;
             charge -= Time.deltaTime;
