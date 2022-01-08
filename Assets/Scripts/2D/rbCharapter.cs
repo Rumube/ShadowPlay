@@ -15,6 +15,7 @@ public class rbCharapter : MonoBehaviour
     public float DashDistance = 5f;
     public float health = 5;
     public float charge= 5;
+    public float currentCharge;
     public float muelleSalto;
     [Header("CHECK")]
     //MOVIMIENTO
@@ -23,6 +24,9 @@ public class rbCharapter : MonoBehaviour
     public bool _isGrounded = false;
     public LayerMask ground;
     bool _isRight;
+    bool _isInvulnerable=false;
+
+    public bool saltoMuell = false;
     //AGARRAR
     public LayerMask wall;
     public float objectdistance;
@@ -37,7 +41,7 @@ public class rbCharapter : MonoBehaviour
         _body = GetComponent<Rigidbody>();
         _isRight = true;
         anim = GetComponent<Animator>();
-
+        currentCharge = 5f;
     }
 
     void Update()
@@ -59,13 +63,16 @@ public class rbCharapter : MonoBehaviour
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
             _isGrounded = true;
-
+            saltoMuell = false;
+            anim.SetBool("Salto2", saltoMuell);
+            anim.SetBool("salto", false);
         }
         else
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
 
             _isGrounded = false;
+           
 
         }
 
@@ -78,11 +85,10 @@ public class rbCharapter : MonoBehaviour
 
 
         }
-        else
-        {
-            anim.SetBool("salto", false);
+       
+        
 
-        }
+        
 
 
         _inputs = Vector3.zero;
@@ -154,7 +160,10 @@ public class rbCharapter : MonoBehaviour
 
         }
 
-
+        if (saltoMuell)
+        {
+            StartCoroutine(salto());
+        }
 
     }
 
@@ -172,12 +181,15 @@ public class rbCharapter : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Trampa")
+        if (collision.gameObject.tag == "Trampa" && _isInvulnerable == false)
         {
             health -= 1;
             anim.SetBool("golpe", true);
             GameObject luz = GameObject.FindGameObjectWithTag("luz");
             luz.GetComponent<Light>().intensity -= 0.2f;
+            _isInvulnerable = true;
+            StartCoroutine(damageTime());
+
         }
 
     }
@@ -191,8 +203,9 @@ public class rbCharapter : MonoBehaviour
             _body.AddForce(transform.up * Mathf.Sqrt(JumpHeight * muelleSalto * Physics.gravity.y), ForceMode.Impulse);
             //collision.gameObject.GetComponent<Animator>().SetBool("Touch", true);
             other.gameObject.GetComponent<Animator>().Play("Muelle");
+            saltoMuell = true;
 
-            anim.SetBool("Salto2", true);
+            anim.SetBool("Salto2", saltoMuell);
 
         }
        
@@ -218,23 +231,44 @@ public class rbCharapter : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Q))
         {
-            charge = 5;
-            charge -= Time.deltaTime;
+           
+            currentCharge -= Time.deltaTime;
             anim.SetBool("carga", true);
 
-            if (charge <= 0)
+            if (currentCharge <= 0)
             {
-                health += 1;
                 GameObject luz = GameObject.FindGameObjectWithTag("luz");
-                luz.GetComponent<Light>().intensity += 0.2f;
+                if (luz.GetComponent<Light>().intensity < 1)
+                {
+                    luz.GetComponent<Light>().intensity += 0.2f;
+                    health += 1;
+
+                }
+                currentCharge = charge;
             }
         }
         else
         {
             anim.SetBool("carga", false);
+            currentCharge = charge;
 
         }
     }
+     IEnumerator salto()
+    {
+        
+        yield return new WaitForSeconds(1f);
+        saltoMuell = false;
+        anim.SetBool("Salto2", saltoMuell);
 
+    }
+
+    IEnumerator damageTime()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+        _isInvulnerable = false;
+
+    }
 
 }
