@@ -208,6 +208,11 @@ public class rbCharapter : MonoBehaviour
             anim.SetBool("Salto2", saltoMuell);
 
         }
+        Debug.Log(_body.velocity.y);
+        if (other.gameObject.tag == "Caida"&& _body.velocity.y<-6)
+        {
+            health -= 5;
+        }
        
     }
     public float Get_health

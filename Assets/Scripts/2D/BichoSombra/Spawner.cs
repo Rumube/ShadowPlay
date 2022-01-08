@@ -6,28 +6,32 @@ public class Spawner : MonoBehaviour
 {
     // Assign a Rigidbody component in the inspector to instantiate
 
-    public Rigidbody projectile;
+    public GameObject projectile;
     bool disparando;
+    public float vel;
+    public Animator animator;
     
 
     void Update()
     {
         if (disparando==false)
         {
+            animator.Play("InicioAtaque");
             StartCoroutine("Espera");
+
         } 
     }
 
     IEnumerator Espera()
     {
         disparando = true;
-        Rigidbody clone;
+        GameObject clone;
 
         clone = Instantiate(projectile, transform.position, transform.rotation);
-        clone.gameObject.SetActive(true);
+        clone.SetActive(true);
 
-        clone.velocity = transform.TransformDirection(Vector3.left * 10);
-        yield return new WaitForSeconds(2f);
+        clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.left * vel*Time.deltaTime);
+        yield return new WaitForSeconds(3f);
         disparando = false;
        
     }
