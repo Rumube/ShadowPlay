@@ -7,7 +7,7 @@ public class rbCharapter : MonoBehaviour
 {
     [Header("REFS")]
     public GameObject _playerLight;
-
+    public GameObject _centro;
     [Header("STATS")]
     public float Speed = 5f;
     public float JumpHeight = 2f;
@@ -15,7 +15,7 @@ public class rbCharapter : MonoBehaviour
     public float DashDistance = 5f;
     public float health = 5;
     public float charge= 5;
-
+    public float muelleSalto;
     [Header("CHECK")]
     //MOVIMIENTO
     private Rigidbody _body;
@@ -128,14 +128,19 @@ public class rbCharapter : MonoBehaviour
             direccion = -Vector3.forward;
 
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(direccion), out hit, objectdistance, wall) && Input.GetKey(KeyCode.E))
+        if (Physics.Raycast(_centro.transform.position, transform.TransformDirection(direccion), out hit, objectdistance) && Input.GetKey(KeyCode.E))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(direccion) * hit.distance, Color.yellow);
-            hit.collider.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            print("Grab: " + hit.collider.gameObject.name);
-            _lastGrab = hit.collider.gameObject.GetComponent<Rigidbody>();
-            anim.SetBool("empuje1", true);
+            if (hit.transform.gameObject.tag == "wall")
+            {
+                Debug.DrawRay(_centro.transform.position , transform.TransformDirection(direccion) * hit.distance, Color.yellow);
+                hit.collider.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                print("Grab: " + hit.collider.gameObject.name);
+                _lastGrab = hit.collider.gameObject.GetComponent<Rigidbody>();
+                anim.SetBool("empuje", true);
 
+            }
+            
+            
         }
         else
         {
@@ -145,7 +150,7 @@ public class rbCharapter : MonoBehaviour
                 _lastGrab.isKinematic = true;
                 _lastGrab = null;
             }
-            anim.SetBool("empuje1", false);
+            anim.SetBool("empuje", false);
 
         }
 
@@ -159,18 +164,11 @@ public class rbCharapter : MonoBehaviour
         {
             health -= 1;
             anim.SetBool("golpe", true);
+            GameObject luz = GameObject.FindGameObjectWithTag("luz");
+            luz.GetComponent<Light>().intensity -= 0.2f;
 
         }
-        if (collision.gameObject.tag == "Muelle")
-        {
-
-
-            _body.AddForce(transform.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
-            //collision.gameObject.GetComponent<Animator>().SetBool("Touch", true);
-            collision.gameObject.GetComponent<Animator>().Play("Muelle");
-            anim.SetTrigger("salto2");
-
-        }
+        
     }
     private void OnCollisionStay(Collision collision)
     {
@@ -178,9 +176,26 @@ public class rbCharapter : MonoBehaviour
         {
             health -= 1;
             anim.SetBool("golpe", true);
-
+            GameObject luz = GameObject.FindGameObjectWithTag("luz");
+            luz.GetComponent<Light>().intensity -= 0.2f;
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Muelle")
+        {
+
+
+            _body.AddForce(transform.up * Mathf.Sqrt(JumpHeight * muelleSalto * Physics.gravity.y), ForceMode.Impulse);
+            //collision.gameObject.GetComponent<Animator>().SetBool("Touch", true);
+            other.gameObject.GetComponent<Animator>().Play("Muelle");
+
+            anim.SetBool("Salto2", true);
+
+        }
+       
     }
     public float Get_health
     {
@@ -211,7 +226,7 @@ public class rbCharapter : MonoBehaviour
             {
                 health += 1;
                 GameObject luz = GameObject.FindGameObjectWithTag("luz");
-                luz.GetComponent<Light>().intensity -= 0.2f;
+                luz.GetComponent<Light>().intensity += 0.2f;
             }
         }
         else

@@ -13,6 +13,7 @@ TagManager:
   - ObjetosParaCrear
   - Trampa
   - luz
+  - wall
   layers:
   - Default
   - TransparentFX
