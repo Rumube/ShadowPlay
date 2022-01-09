@@ -174,7 +174,7 @@ public class rbCharapter : MonoBehaviour
             health -= 1;
             anim.SetBool("golpe", true);
             GameObject luz = GameObject.FindGameObjectWithTag("luz");
-            luz.GetComponent<Light>().intensity -= 0.2f;
+            luz.GetComponent<Light>().intensity -= 0.3f;
 
         }
         
@@ -186,7 +186,7 @@ public class rbCharapter : MonoBehaviour
             health -= 1;
             anim.SetBool("golpe", true);
             GameObject luz = GameObject.FindGameObjectWithTag("luz");
-            luz.GetComponent<Light>().intensity -= 0.2f;
+            luz.GetComponent<Light>().intensity -= 0.3f;
             _isInvulnerable = true;
             StartCoroutine(damageTime());
 
@@ -209,9 +209,11 @@ public class rbCharapter : MonoBehaviour
 
         }
         Debug.Log(_body.velocity.y);
-        if (other.gameObject.tag == "Caida"&& _body.velocity.y<-6)
+        if (other.gameObject.tag == "Caida"&& _body.velocity.y<-2)
         {
             health -= 5;
+            GameObject luz = GameObject.FindGameObjectWithTag("luz");
+            luz.GetComponent<Light>().intensity -= 1f;
         }
        
     }
@@ -245,7 +247,7 @@ public class rbCharapter : MonoBehaviour
                 GameObject luz = GameObject.FindGameObjectWithTag("luz");
                 if (luz.GetComponent<Light>().intensity < 1)
                 {
-                    luz.GetComponent<Light>().intensity += 0.2f;
+                    luz.GetComponent<Light>().intensity += 0.3f;
                     health += 1;
 
                 }
