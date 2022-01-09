@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class rbCharapter : MonoBehaviour
 {
     [Header("REFS")]
     public GameObject _playerLight;
     public GameObject _centro;
+    public GameObject _textFinal;
+    Vector3 _initPos;
     [Header("STATS")]
     public float Speed = 5f;
     public float JumpHeight = 2f;
     public float GroundDistance = 1f;
     public float DashDistance = 5f;
-    public float health = 5;
+    public float health = 3;
     public float charge= 5;
     public float currentCharge;
     public float muelleSalto;
@@ -42,6 +45,7 @@ public class rbCharapter : MonoBehaviour
         _isRight = true;
         anim = GetComponent<Animator>();
         currentCharge = 5f;
+        _initPos = transform.position;
     }
 
     void Update()
@@ -72,8 +76,6 @@ public class rbCharapter : MonoBehaviour
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
 
             _isGrounded = false;
-           
-
         }
 
 
@@ -82,8 +84,6 @@ public class rbCharapter : MonoBehaviour
         {
             _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
             anim.SetBool("salto", true);
-
-
         }
        
         
@@ -209,13 +209,17 @@ public class rbCharapter : MonoBehaviour
 
         }
         Debug.Log(_body.velocity.y);
-        if (other.gameObject.tag == "Caida"&& _body.velocity.y<-2)
+        if (other.gameObject.tag == "Caida"&& _body.velocity.y<-0.5f)
         {
             health -= 5;
             GameObject luz = GameObject.FindGameObjectWithTag("luz");
             luz.GetComponent<Light>().intensity -= 1f;
         }
-       
+
+        if(other.gameObject.tag == "Final")
+        {
+            _textFinal.SetActive(true);
+        }
     }
     public float Get_health
     {
@@ -225,12 +229,12 @@ public class rbCharapter : MonoBehaviour
 
     IEnumerator waitForDead()
     {
-
-        yield return new WaitForSeconds(5);
-
-        SceneManager.LoadScene("LostScreen");
-
-
+        yield return new WaitForSeconds(2f);
+        transform.position = _initPos;
+        health = 3;
+        GameObject luz = GameObject.FindGameObjectWithTag("luz");
+        luz.GetComponent<Light>().intensity = 1f;
+        anim.SetBool("dead", false);
     }
 
     public void carga()

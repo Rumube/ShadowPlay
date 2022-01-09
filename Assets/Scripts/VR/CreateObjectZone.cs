@@ -48,7 +48,6 @@ public class CreateObjectZone : MonoBehaviour
         _isCreating = false;
         setFalseObjects();
         _audioS.Stop();
-        print("Apagarse");
     }
 
     void setFalseObjects()

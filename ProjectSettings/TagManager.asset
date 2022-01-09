@@ -15,6 +15,7 @@ TagManager:
   - luz
   - wall
   - Caida
+  - Final
   layers:
   - Default
   - TransparentFX
